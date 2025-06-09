@@ -3,7 +3,7 @@ import cv2
 
 # Carregando os modelos
 modelo1 = YOLO('yolo11n.pt')  # Alterado de yolo11n.pt para yolov8n.pt (modelo padrão do YOLOv8)
-modelo2 = YOLO('suspeitos.pt')
+modelo2 = YOLO('crime_detection-2.pt')
 
 
 # Definindo as classes para filtrar
@@ -22,7 +22,7 @@ for idx, nome in modelo2.names.items():
 
 
 # Inicializar o vídeo
-video = 'homemarmado2.mp4'
+video = 'exemplo4arma.mp4'
 cap = cv2.VideoCapture(video)
 
 # Configuração dos modelos
@@ -59,7 +59,7 @@ while True:
                 if i == 0:
                     label = f"Pessoa: {conf:.2f}"
                 elif i == 1:
-                    label = f"Suspeito: {conf:.2f}"
+                    label = f"Arma: {conf:.2f}"
                 else:
                     label = f"Arma: {conf:.2f}"
                     
@@ -67,8 +67,8 @@ while True:
     
     # Adiciona a legenda
     h, w = frame_final.shape[:2]
-    cv2.putText(frame_final, "Pessoas (Verde)", (10, h-60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
-    cv2.putText(frame_final, "Suspeitos (Vermelho)", (10, h-40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
+    cv2.putText(frame_final, "Pessoas (Verde)", (10, h-60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 1)
+    cv2.putText(frame_final, "Armas (Vermelho)", (10, h-40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1)
     
     # Mostra o frame com todas as detecções
     cv2.imshow('Detecções Combinadas', frame_final)
